@@ -11,10 +11,10 @@ $this->title = Yii::t('app', 'Google Scholar Parser');
 
         <p class="lead"><?= Yii::t('app', 'Vernadsky National Library of Ukraine') ?></p>
         <p class="text-muted" style="font-size: small">
-            ЛОБУЗІНА Катерина Вілентіївна <br>
-            керівник Центру, кандидат технічних наук, доктор наук із соціальних комунікацій<br>
-            Центр бібліотечних електронних ресурсів і технологій<br>
-            Відділ інформаційно-комунікаційних технологій
+            <?= Yii::t('app', 'LOBUZІNA Katerina Vіlentіїvna') ?> <br>
+            <?= Yii::t('app', 'Head of the Centre, Candidate of Technical Sciences, Ph.D. of Social Communications') ?><br>
+            <?= Yii::t('app', 'Center library electronic resources and technologies') ?><br>
+            <?= Yii::t('app', 'Department of Information and Communication Technologies') ?>
         </p>
 
     </div>

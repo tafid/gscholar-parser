@@ -17,8 +17,11 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Center library electronic resources and technologies' => 'Центр бібліотечних електронних ресурсів і технологій',
+    'Department of Information and Communication Technologies' => 'Відділ інформаційно-комунікаційних технологій',
+    'Head of the Centre, Candidate of Technical Sciences, Ph.D. of Social Communications' => 'керівник Центру, кандидат технічних наук, доктор наук із соціальних комунікацій',
     'ID' => '',
-    'Present' => 'В наявності',
+    'LOBUZІNA Katerina Vіlentіїvna' => 'ЛОБУЗІНА Катерина Вілентіївна',
     'Add user' => 'Додати запис',
     'Are you sure you want to delete this item?' => 'Ви впевнені, що хочете видалити цей запис?',
     'Bib Ref' => 'Бібліографічні посилання',
@@ -36,6 +39,7 @@ return [
     'Missing' => 'Відсутній',
     'Password' => 'Пароль',
     'Please fill out the following fields to login' => 'Будь ласка, заповніть наступні поля для входу',
+    'Present' => 'В наявності',
     'Remember Me' => 'Запам\'ятати мене',
     'Update' => 'Змінити',
     'Update At' => 'Змінено',
