@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'enableSorting' => false,
                     'format' => 'raw',
                     'value' => function ($model) {
-                        return Html::a($model->user_id, sprintf('https://scholar.google.com.ua/citations?user=%s&hl=uk', $model->user_id), ['target' => '_blank']);
+                        return Html::a($model->user_id, sprintf('https://scholar.google.com.ua/citations?user=%s', $model->user_id), ['target' => '_blank']);
                     }
                 ],
                 'h_index',

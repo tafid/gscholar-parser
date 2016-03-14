@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'user_id',
                 'format' => 'raw',
-                'value' => Html::a($model->user_id, sprintf('https://scholar.google.com.ua/citations?user=%s&hl=uk', $model->user_id), ['target' => '_blank'])
+                'value' => Html::a($model->user_id, sprintf('https://scholar.google.com.ua/citations?user=%s', $model->user_id), ['target' => '_blank'])
             ],
             'h_index',
             'bib_ref',
