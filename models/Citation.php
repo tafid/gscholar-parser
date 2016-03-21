@@ -44,6 +44,8 @@ class Citation extends \yii\db\ActiveRecord
     {
         return [
             [['user_id'], 'required'],
+            [['user_id'], 'filter', 'filter' => 'trim', 'skipOnArray' => true],
+            [['user_id'], 'unique', 'targetAttribute' => ['user_id']],
             [['h_index', 'bib_ref', 'missing'], 'integer'],
             [['updated_at'], 'safe'],
             [['user_id'], 'string', 'max' => 255],
