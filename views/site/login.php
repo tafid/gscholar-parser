@@ -17,7 +17,7 @@ $this->title = Yii::t('app', 'Login');
             <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
             <?= $form->field($model, 'password')->passwordInput() ?>
             <?= $form->field($model, 'rememberMe')->checkbox() ?>
-            <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn btn-default btn-block', 'name' => 'login-button']) ?>
+            <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn btn-primary btn-block', 'name' => 'login-button']) ?>
             <?php ActiveForm::end(); ?>
         </div>
     </div>
