@@ -35,11 +35,11 @@ JS
     <p>
         <?= Html::a('<i class="glyphicon glyphicon-plus"></i>&nbsp; ' . Yii::t('app', 'Add user'), ['create'], ['class' => 'btn btn-success']) ?>
         <?= Html::a('<i class="glyphicon glyphicon-floppy-save"></i>&nbsp; ' . Yii::t('app', 'Export data'), ['export'], ['class' => 'btn btn-info']) ?>
-        <?= Html::a('<i class="fa fa-refresh"></i>&nbsp; ' . Yii::t('app', 'Load data'), ['export'], [
+        <?= Html::a('<i class="fa fa-refresh"></i>&nbsp; ' . Yii::t('app', 'Fetch data'), ['export'], [
             'id' => 'refresh-data',
             'class' => 'btn btn-warning',
             'data-loading-text' => '<i class="fa fa-refresh fa-spin"></i>&nbsp;&nbsp;' . Yii::t('app', 'Loading') . '...',
-            'data-complete-text' => '<i class="fa fa-refresh"></i>&nbsp; ' . Yii::t('app', 'Load data')
+            'data-complete-text' => '<i class="fa fa-refresh"></i>&nbsp; ' . Yii::t('app', 'Fetch data')
         ]) ?>
     </p>
     <?php Pjax::begin(['id' => 'citation-grid']) ?>

@@ -17,9 +17,8 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Fetch data' => 'Отримати дані',
     'ID' => '',
-    'Load data' => 'Завантажити дані',
-    'Loading' => 'Завантаження',
     'Add user' => 'Додати запис',
     'Are you sure you want to delete this item?' => 'Ви впевнені, що хочете видалити цей запис?',
     'Bib Ref' => 'Бібліографічні посилання',
@@ -36,6 +35,7 @@ return [
     'Head of the Centre, Candidate of Technical Sciences, Ph.D. of Social Communications' => 'керівник Центру, кандидат технічних наук, доктор наук із соціальних комунікацій',
     'Incorrect username or password.' => 'Неправильне логін користувача або пароль.',
     'LOBUZІNA Katerina Vіlentіїvna' => 'ЛОБУЗІНА Катерина Вілентіївна',
+    'Loading' => 'Завантаження',
     'Login' => 'Увійти',
     'Logout ({0})' => 'Вийти ({0})',
     'Missing' => 'Відсутній',
