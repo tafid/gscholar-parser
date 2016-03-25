@@ -28,7 +28,7 @@ $(document).on('click', '#refresh-data', function(event) {
 $(document).on('pjax:send', function() {
     $('.overlay').show()
 });
-$(document).on('pjax:complete', function() {
+$(document).on('pjax:beforeReplace', function() {
     $('.overlay').hide()
 });
 JS
