@@ -11,20 +11,26 @@ $this->title = Yii::t('app', 'Citations');
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerJs(<<<JS
 $(document).on('click', '#refresh-data', function(event) {
-        event.preventDefault();
-        var refreshDataBtn = $(this);
-        refreshDataBtn.button('loading');
-        $.post('refresh-data', function(data) {
-            if (data.status === true) {
-                $.pjax.reload({container:"#citation-grid"});
-                refreshDataBtn.button('complete');
-            } else {
-                alert('Error');
-            }
-        });
-
-        return false;
+    event.preventDefault();
+    var refreshDataBtn = $(this);
+    refreshDataBtn.button('loading');
+    $.post('refresh-data', function(data) {
+        if (data.status === true) {
+            $.pjax.reload({container:"#citation-grid"});
+            refreshDataBtn.button('complete');
+        } else {
+            alert('Error');
+        }
     });
+
+    return false;
+});
+$(document).on('pjax:send', function() {
+    $('#overlay').show()
+});
+$(document).on('pjax:complete', function() {
+    $('#overlay').hide()
+});
 JS
 )
 ?>
@@ -42,7 +48,11 @@ JS
             'data-complete-text' => '<i class="fa fa-refresh"></i>&nbsp; ' . Yii::t('app', 'Fetch data')
         ]) ?>
     </p>
+
     <?php Pjax::begin(['id' => 'citation-grid']) ?>
+    <div class="overlay" style="display: none">
+        <i class="fa fa-refresh fa-spin"></i>
+    </div>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
