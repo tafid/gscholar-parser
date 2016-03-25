@@ -18,8 +18,7 @@
         "yiisoft/yii2": ">=2.0.5",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
-        "serhatozles/yii2-simplehtmldom": "dev-master",
-        "vova07/yii2-console-runner-extension": "*"
+        "serhatozles/yii2-simplehtmldom": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
