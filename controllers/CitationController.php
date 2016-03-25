@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use app\models\CitationSearch;
+use Exception;
+use serhatozles\simplehtmldom\SimpleHTMLDom;
 use Yii;
 use app\models\Citation;
 use yii\data\ActiveDataProvider;
@@ -146,5 +148,16 @@ class CitationController extends Controller
         }
 
         Yii::$app->response->sendContentAsFile($content, sprintf('citation_%s.txt', date('Y-m-d')));
+    }
+
+    public function actionRefreshData()
+    {
+        $request = Yii::$app->request;
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        if ($request->isPost && $request->isAjax) {
+            (new Citation())->fetchData();
+            return ['status' => true];
+        }
+        Yii::$app->end();
     }
 }

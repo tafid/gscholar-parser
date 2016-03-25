@@ -2,12 +2,31 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Citations');
 $this->params['breadcrumbs'][] = $this->title;
+$this->registerJs(<<<JS
+$(document).on('click', '#refresh-data', function(event) {
+        event.preventDefault();
+        var refreshDataBtn = $(this);
+        refreshDataBtn.button('loading');
+        $.post('refresh-data', function(data) {
+            if (data.status === true) {
+                $.pjax.reload({container:"#citation-grid"});
+                refreshDataBtn.button('complete');
+            } else {
+                alert('Error');
+            }
+        });
+
+        return false;
+    });
+JS
+)
 ?>
 <div class="citation-index">
 
@@ -16,7 +35,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('<i class="glyphicon glyphicon-plus"></i>&nbsp; ' . Yii::t('app', 'Add user'), ['create'], ['class' => 'btn btn-success']) ?>
         <?= Html::a('<i class="glyphicon glyphicon-floppy-save"></i>&nbsp; ' . Yii::t('app', 'Export data'), ['export'], ['class' => 'btn btn-info']) ?>
+        <?= Html::a('<i class="fa fa-refresh"></i>&nbsp; ' . Yii::t('app', 'Load data'), ['export'], [
+            'id' => 'refresh-data',
+            'class' => 'btn btn-warning',
+            'data-loading-text' => '<i class="fa fa-refresh fa-spin"></i>&nbsp;&nbsp;' . Yii::t('app', 'Loading') . '...',
+            'data-complete-text' => '<i class="fa fa-refresh"></i>&nbsp; ' . Yii::t('app', 'Load data')
+        ]) ?>
     </p>
+    <?php Pjax::begin(['id' => 'citation-grid']) ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -59,4 +85,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+    <?php Pjax::end(); ?>
 </div>

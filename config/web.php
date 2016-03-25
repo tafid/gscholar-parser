@@ -9,6 +9,10 @@ $config = [
     'bootstrap' => ['log'],
     'language' => 'uk',
     'components' => [
+        'consoleRunner' => [
+            'class' => 'vova07\console\ConsoleRunner',
+            'file' => '@app/yii' // or an absolute path to console file
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'BJaBX9j32GaGzcLH3XmkhEFDWWFuVJk8',

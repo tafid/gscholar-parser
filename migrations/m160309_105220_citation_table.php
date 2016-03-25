@@ -9,9 +9,9 @@ class m160309_105220_citation_table extends Migration
         $this->createTable('citation', [
             'id' => $this->primaryKey(),
             'user_id' => $this->string()->notNull(),
-            'h_index' => $this->integer(),
-            'bib_ref' => $this->integer(),
-            'missing' => $this->boolean()->defaultValue(0),
+            'h_index' => $this->integer()->defaultValue(0),
+            'bib_ref' => $this->integer()->defaultValue(0),
+            'missing' => $this->boolean()->defaultValue(1),
             'updated_at' => $this->dateTime()
         ]);
     }
