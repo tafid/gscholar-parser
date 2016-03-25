@@ -26,10 +26,10 @@ $(document).on('click', '#refresh-data', function(event) {
     return false;
 });
 $(document).on('pjax:send', function() {
-    $('#overlay').show()
+    $('.overlay').show()
 });
 $(document).on('pjax:complete', function() {
-    $('#overlay').hide()
+    $('.overlay').hide()
 });
 JS
 )
