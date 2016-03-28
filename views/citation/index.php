@@ -9,6 +9,7 @@ use yii\widgets\Pjax;
 
 $this->title = Yii::t('app', 'Citations');
 $this->params['breadcrumbs'][] = $this->title;
+$this->registerCss('.btn {margin-bottom: 5px;');
 $this->registerJs(<<<JS
 $(document).on('click', '#refresh-data', function(event) {
     event.preventDefault();
@@ -39,11 +40,11 @@ JS
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('<i class="glyphicon glyphicon-plus"></i>&nbsp; ' . Yii::t('app', 'Add user'), ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('<i class="glyphicon glyphicon-floppy-save"></i>&nbsp; ' . Yii::t('app', 'Export data'), ['export'], ['class' => 'btn btn-info']) ?>
+        <?= Html::a('<i class="glyphicon glyphicon-plus"></i>&nbsp; ' . Yii::t('app', 'Add user'), ['create'], ['class' => 'btn btn-success visible-lg-inline-block visible-md-inline-block visible-sm-inline-block visible-xs-block']) ?>
+        <?= Html::a('<i class="glyphicon glyphicon-floppy-save"></i>&nbsp; ' . Yii::t('app', 'Export data'), ['export'], ['class' => 'btn btn-info visible-lg-inline-block visible-md-inline-block visible-sm-inline-block visible-xs-block']) ?>
         <?= Html::a('<i class="fa fa-refresh"></i>&nbsp; ' . Yii::t('app', 'Fetch data'), ['export'], [
             'id' => 'refresh-data',
-            'class' => 'btn btn-warning',
+            'class' => 'btn btn-warning visible-lg-inline-block visible-md-inline-block visible-sm-inline-block visible-xs-block',
             'data-loading-text' => '<i class="fa fa-refresh fa-spin"></i>&nbsp;&nbsp;' . Yii::t('app', 'Loading') . '...',
             'data-complete-text' => '<i class="fa fa-refresh"></i>&nbsp; ' . Yii::t('app', 'Fetch data')
         ]) ?>

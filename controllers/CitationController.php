@@ -134,20 +134,7 @@ class CitationController extends Controller
 
     public function actionExport()
     {
-        $content = '';
-        $rows = Yii::$app->db->createCommand("SELECT * FROM `citation`")->queryAll();
-        foreach($rows as $k => $row) {
-            $n = 0;
-            foreach ($row as $field => $value) {
-                if ($field == 'updated_at' || $field == 'id') continue;
-                $result = preg_replace("/\s+/", " ", $value);
-                $n++;
-                $content .= sprintf("#%d: %s\r\n", $n, $result);
-            }
-            $content .= "*****\r\n";
-        }
-
-        Yii::$app->response->sendContentAsFile($content, sprintf('citation_%s.txt', date('Y-m-d')));
+        Yii::$app->response->sendContentAsFile(Citation::exportToFile(), sprintf('citation_%s.txt', date('Y-m-d')));
     }
 
     public function actionRefreshData()

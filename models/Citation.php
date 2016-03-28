@@ -100,4 +100,25 @@ class Citation extends \yii\db\ActiveRecord
 
         return $result;
     }
+
+    public static function exportToFile()
+    {
+        $content = '';
+        $rows = Yii::$app->db->createCommand("SELECT * FROM `citation`")->queryAll();
+        foreach($rows as $k => $row) {
+            $n = 0;
+            foreach ($row as $field => $value) {
+                if ($field == 'id') continue;
+                if ($field == 'updated_at') {
+                    $value = (new \DateTime($value))->format('Ymd');
+                }
+                $result = preg_replace("/\s+/", " ", $value);
+                $n++;
+                $content .= sprintf("#%d: %s\r\n", $n, $result);
+            }
+            $content .= "*****\r\n";
+        }
+
+        return $content;
+    }
 }
