@@ -51,6 +51,7 @@ class CitationController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
+            'model' => new Citation(['scenario' => 'import-data'])
         ]);
     }
 

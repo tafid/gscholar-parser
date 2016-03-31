@@ -20,6 +20,8 @@ use yii\db\Expression;
  */
 class Citation extends \yii\db\ActiveRecord
 {
+    public $file;
+
     public function behaviors()
     {
         return [
@@ -51,6 +53,8 @@ class Citation extends \yii\db\ActiveRecord
             [['h_index', 'bib_ref', 'missing'], 'integer'],
             [['updated_at'], 'safe'],
             [['user_id'], 'string', 'max' => 255],
+            [['file'], 'file', 'extensions' => ['txt', 'csv'], 'maxSize' => 1048576, 'on' => ['import-data']],
+            [['file'], 'required', 'on' => ['import-data']]
         ];
     }
 
@@ -66,6 +70,7 @@ class Citation extends \yii\db\ActiveRecord
             'bib_ref' => Yii::t('app', 'Bib Ref'),
             'missing' => Yii::t('app', 'Missing'),
             'updated_at' => Yii::t('app', 'Update At'),
+            'file' => Yii::t('app', 'File with user IDs'),
         ];
     }
 
