@@ -29,3 +29,4 @@ phpunit.phar
 #other
 /config/users.php
 /config/db.php
+composer.lock

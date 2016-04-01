@@ -12,6 +12,7 @@ $this->title = Yii::t('app', 'Citations');
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerCss('.btn {margin-bottom: 5px;');
 $this->registerJs(<<<JS
+$(':checkbox').radiocheck();
 // Refresh data
 $(document).on('click', '#refresh-data', function(event) {
     event.preventDefault();
@@ -86,7 +87,7 @@ JS
                         1 => Yii::t('app', 'Missing'),
                         0 => Yii::t('app', 'Present')
                     ],
-                    ['class' => 'form-control', 'prompt' => '--']
+                    ['class' => 'form-control', 'prompt' => '--',  'data-toggle' => 'select']
                 ),
             ],
             'updated_at',
