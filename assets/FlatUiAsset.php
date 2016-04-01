@@ -17,7 +17,7 @@ class FlatUiAsset extends AssetBundle
     ];
     public $js = [
         'js/flat-ui.min.js',
-        'js/radiocheck.js',
+//        'js/radiocheck.js',
     ];
     public $depends = [
         'yii\bootstrap\BootstrapAsset'
