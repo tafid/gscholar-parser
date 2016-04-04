@@ -3,6 +3,7 @@
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
@@ -35,6 +36,27 @@ JS
 <div class="citation-index" style="margin-bottom: 1em">
 
     <h1><?= Html::encode($this->title) ?></h1>
+
+    <?php if (Yii::$app->session->hasFlash('info')) : ?>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><?= Yii::t('app', 'The results of the import') ?></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p><?= Yii::$app->session->getFlash('info') ?></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><?= Yii::t('app', 'Close') ?></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php $this->registerJs('$(\'#myModal\').modal(\'show\')') ?>
+    <?php endif; ?>
 
     <div class="row" style="margin-bottom: 1em">
         <div class="col-md-12">
@@ -102,6 +124,8 @@ JS
         <legend><?= Yii::t('app', 'Import users from file') ?></legend>
         <?php $form = ActiveForm::begin([
             'id' => 'import-data-form',
+            'action' => Url::toRoute(['import-data']),
+            'options' => ['enctype' => 'multipart/form-data']
         ]); ?>
         <?= $form->field($model, 'file')->fileInput()->hint(Yii::t('app', 'Example block-level help text here.')) ?>
         <div class="form-group">

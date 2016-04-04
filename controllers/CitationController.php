@@ -9,9 +9,11 @@ use Yii;
 use app\models\Citation;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
+use yii\helpers\Html;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * CitationController implements the CRUD actions for Citation model.
@@ -147,5 +149,35 @@ class CitationController extends Controller
             return ['status' => true];
         }
         Yii::$app->end();
+    }
+
+    public function actionImportData()
+    {
+        $model = new Citation(['scenario' => 'import-data']);
+        if (Yii::$app->request->isPost) {
+            $model->file = UploadedFile::getInstance($model, 'file');
+            if ($model->file) { //  && $model->validate()
+                $userIds = [];
+                $userMessages = [];
+                $fh = fopen($model->file->tempName, 'r');
+                while (($row = fgetcsv($fh, 1000, ";")) !== false) {
+                    $userIds[] = reset($row);
+                }
+                fclose($fh);
+                foreach ($userIds as $uid) {
+                    $messages = Html::tag('span', Yii::t('app', 'Added'), ['class' => 'text-success']);
+                    $rec = new Citation();
+                    $rec->user_id = $uid;
+                    if ($rec->validate()) {
+//                        $rec->save();
+                    } else {
+                        $messages = Html::tag('span', $rec->getFirstError('user_id'), ['class' => 'text-danger']);
+                    }
+                    $userMessages[] = Yii::t('app', '{user} - {status}', ['user' => $uid, 'status' => $messages]);
+                }
+                \Yii::$app->getSession()->setFlash('info', implode('<br>', $userMessages));
+            }
+        }
+        $this->redirect(['index']);
     }
 }
