@@ -47,13 +47,17 @@ class Citation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id'], 'required'],
-            [['user_id'], 'filter', 'filter' => 'trim', 'skipOnArray' => true],
-            [['user_id'], 'unique', 'targetAttribute' => ['user_id']],
-            [['h_index', 'bib_ref', 'missing'], 'integer'],
-            [['updated_at'], 'safe'],
-            [['user_id'], 'string', 'max' => 255],
-            [['file'], 'file', 'extensions' => ['txt', 'csv'], 'maxSize' => 1048576, 'on' => ['import-data']],
+            // Default scenarios
+            [['user_id'], 'required', 'on' => ['insert', 'update']],
+            [['user_id'], 'filter', 'filter' => 'trim', 'skipOnArray' => true, 'on' => ['insert', 'update']],
+            [['user_id'], 'unique', 'targetAttribute' => ['user_id'], 'on' => ['insert', 'update']],
+            [['h_index', 'bib_ref', 'missing'], 'integer', 'on' => ['insert', 'update']],
+            [['updated_at'], 'safe', 'on' => ['insert', 'update']],
+            [['user_id'], 'string', 'max' => 255, 'on' => ['insert', 'update']],
+            ['user_id', 'match', 'pattern' => '/^[a-zA-Z0-9-_]+$/', 'on' => ['insert', 'update'], 'message' => Yii::t('app', 'This ID does not look like the right one for Google Scholar')],
+
+            // Import data from file
+            [['file'], 'file', 'extensions' => ['txt', 'csv'], 'checkExtensionByMimeType' => false, 'maxSize' => 1048576, 'on' => ['import-data']],
             [['file'], 'required', 'on' => ['import-data']]
         ];
     }

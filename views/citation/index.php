@@ -57,8 +57,7 @@ JS
         </div>
         <?php $this->registerJs('$(\'#myModal\').modal(\'show\')') ?>
     <?php endif; ?>
-
-    <div class="row" style="margin-bottom: 1em">
+        <div class="row" style="margin-bottom: 1em">
         <div class="col-md-12">
             <?= Html::a('<i class="glyphicon glyphicon-plus"></i>&nbsp; ' . Yii::t('app', 'Add user'), ['create'], ['class' => 'btn btn-success visible-lg-inline-block visible-md-inline-block visible-sm-inline-block visible-xs-block']) ?>
             <?= Html::a('<i class="glyphicon glyphicon-floppy-save"></i>&nbsp; ' . Yii::t('app', 'Export data'), ['export'], ['class' => 'btn btn-info visible-lg-inline-block visible-md-inline-block visible-sm-inline-block visible-xs-block']) ?>
@@ -70,7 +69,6 @@ JS
             ]) ?>
         </div>
     </div>
-
     <?php Pjax::begin(['id' => 'citation-grid']) ?>
     <div class="overlay" style="display: none">
         <i class="fa fa-refresh fa-spin"></i>
@@ -119,6 +117,11 @@ JS
     ]); ?>
     <?php Pjax::end(); ?>
 </div>
+<?php if (Yii::$app->session->hasFlash('error')) : ?>
+    <div class="alert alert-danger" role="alert">
+        <p><?= Yii::$app->session->getFlash('error') ?></p>
+    </div>
+<?php endif; ?>
 <div class="well well-sm">
     <fieldset>
         <legend><?= Yii::t('app', 'Import users from file') ?></legend>

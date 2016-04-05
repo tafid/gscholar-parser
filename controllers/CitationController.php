@@ -156,17 +156,13 @@ class CitationController extends Controller
         $model = new Citation(['scenario' => 'import-data']);
         if (Yii::$app->request->isPost) {
             $model->file = UploadedFile::getInstance($model, 'file');
-            if ($model->file) { //  && $model->validate()
-                $userIds = [];
+            if ($model->file && $model->validate()) { //  && $model->validate()
                 $userMessages = [];
-                $fh = fopen($model->file->tempName, 'r');
-                while (($row = fgetcsv($fh, 1000, ";")) !== false) {
-                    $userIds[] = reset($row);
-                }
-                fclose($fh);
+                $content = file_get_contents($model->file->tempName);
+                $userIds = str_getcsv($content, "\n"); //parse the rows
                 foreach ($userIds as $uid) {
                     $messages = Html::tag('span', Yii::t('app', 'Added'), ['class' => 'text-success']);
-                    $rec = new Citation();
+                    $rec = new Citation(['scenario' => 'insert']);
                     $rec->user_id = $uid;
                     if ($rec->validate()) {
 //                        $rec->save();
@@ -176,6 +172,9 @@ class CitationController extends Controller
                     $userMessages[] = Yii::t('app', '{user} - {status}', ['user' => $uid, 'status' => $messages]);
                 }
                 \Yii::$app->getSession()->setFlash('info', implode('<br>', $userMessages));
+            } else {
+                $errors = $model->getErrors('file');
+                \Yii::$app->getSession()->setFlash('error', implode('<br>', $errors));
             }
         }
         $this->redirect(['index']);
