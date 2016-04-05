@@ -30,6 +30,12 @@ $(document).on('click', '#refresh-data', function(event) {
 
     return false;
 });
+$(document).on('pjax:send', function() {
+    $('.overlay').show()
+});
+$(document).on('pjax:beforeReplace', function() {
+    $('.overlay').hide()
+});
 JS
 )
 ?>
