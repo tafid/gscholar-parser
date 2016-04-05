@@ -10,6 +10,7 @@ use app\models\Citation;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\helpers\Html;
+use yii\helpers\StringHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -157,7 +158,7 @@ class CitationController extends Controller
         $model = new Citation(['scenario' => 'import-data']);
         if (Yii::$app->request->isPost) {
             $model->file = UploadedFile::getInstance($model, 'file');
-            if ($model->file && $model->validate()) { //  && $model->validate()
+            if ($model->file && $model->validate()) {
                 $errorMessages = [];
                 $content = file_get_contents($model->file->tempName);
                 $userIds = str_getcsv($content, "\n"); //parse the rows
@@ -167,8 +168,8 @@ class CitationController extends Controller
                     if ($rec->validate()) {
                         $rec->save();
                     } else {
-                        $errorMessages[] = Yii::t('app', '{user} - {status}', [
-                            'user' => $uid,
+                        $errorMessages[] = Yii::t('app', '{user} : {status}', [
+                            'user' => Html::tag('span', StringHelper::truncate($uid, 20), ['class' => 'label label-danger']),
                             'status' => Html::tag('span', $rec->getFirstError('user_id'), ['class' => 'text-danger'])
                         ]);
                     }

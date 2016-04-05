@@ -47,7 +47,7 @@ return [
     'Present' => '',
     'Remember Me' => '',
     'Select the file with IDs users to import. File size should not exceed 1MB.' => '',
-    'The results of the import' => '',
+    'The lines that could not be imported' => '',
     'This ID does not look like the right one for Google Scholar' => '',
     'Update' => '',
     'Update At' => '',
@@ -56,5 +56,5 @@ return [
     'User ID' => '',
     'Username' => '',
     'Vernadsky National Library of Ukraine' => '',
-    '{user} - {status}' => '',
+    '{user} : {status}' => '',
 ];

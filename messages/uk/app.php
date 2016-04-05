@@ -17,7 +17,7 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Select the file with IDs users to import. File size should not exceed 1MB.' => 'Оберіть файл з ідентифікаторами користувачів для імпорту. Розмір файлу не повинен перевищувати 1MB.',
+    '{user} : {status}' => '',
     'Add user' => 'Додати запис',
     'Are you sure you want to delete this item?' => 'Ви впевнені, що хочете видалити цей запис?',
     'Bib Ref' => 'Бібліографічні посилання',
@@ -47,7 +47,8 @@ return [
     'Please fill out the following fields to login' => 'Будь ласка, заповніть наступні поля для входу',
     'Present' => 'В наявності',
     'Remember Me' => 'Запам\'ятати мене',
-    'The results of the import' => 'Результати імпорту',
+    'Select the file with IDs users to import. File size should not exceed 1MB.' => 'Оберіть файл з ідентифікаторами користувачів для імпорту. Розмір файлу не повинен перевищувати 1MB.',
+    'The lines that could not be imported' => 'Рядки які не вдалося імпортувати',
     'This ID does not look like the right one for Google Scholar' => 'Цей ідентифікатор не виглядає як правильний для Google Scholar',
     'Update' => 'Змінити',
     'Update At' => 'Змінено',
@@ -56,5 +57,4 @@ return [
     'User ID' => 'Ідентифікатор користувача',
     'Username' => 'Логін користувача',
     'Vernadsky National Library of Ukraine' => 'Національна бібліотека України імені В. І. Вернадського',
-    '{user} - {status}' => '{user} - {status}',
 ];
