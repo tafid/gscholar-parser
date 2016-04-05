@@ -158,22 +158,24 @@ class CitationController extends Controller
         if (Yii::$app->request->isPost) {
             $model->file = UploadedFile::getInstance($model, 'file');
             if ($model->file && $model->validate()) { //  && $model->validate()
-                $userMessages = [];
+                $errorMessages = [];
                 $content = file_get_contents($model->file->tempName);
                 $userIds = str_getcsv($content, "\n"); //parse the rows
                 foreach ($userIds as $uid) {
                     $rec = new Citation(['scenario' => 'insert']);
                     $rec->user_id = $uid;
                     if ($rec->validate()) {
-//                        $rec->save();
+                        $rec->save();
                     } else {
-                        $userMessages[] = Yii::t('app', '{user} - {status}', [
+                        $errorMessages[] = Yii::t('app', '{user} - {status}', [
                             'user' => $uid,
                             'status' => Html::tag('span', $rec->getFirstError('user_id'), ['class' => 'text-danger'])
                         ]);
                     }
                 }
-                if (!empty($userMessages)) \Yii::$app->getSession()->setFlash('info', implode('<br>', $userMessages));
+                if (!empty($errorMessages)) {
+                    \Yii::$app->getSession()->setFlash('info', implode('<br>', $errorMessages));
+                }
             } else {
                 $errors = $model->getErrors('file');
                 \Yii::$app->getSession()->setFlash('error', implode('<br>', $errors));
