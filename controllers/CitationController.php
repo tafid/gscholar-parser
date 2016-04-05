@@ -76,7 +76,7 @@ class CitationController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Citation();
+        $model = new Citation(['scenario' => 'insert']);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -96,6 +96,7 @@ class CitationController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->scenario = 'update';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -161,17 +162,18 @@ class CitationController extends Controller
                 $content = file_get_contents($model->file->tempName);
                 $userIds = str_getcsv($content, "\n"); //parse the rows
                 foreach ($userIds as $uid) {
-                    $messages = Html::tag('span', Yii::t('app', 'Added'), ['class' => 'text-success']);
                     $rec = new Citation(['scenario' => 'insert']);
                     $rec->user_id = $uid;
                     if ($rec->validate()) {
 //                        $rec->save();
                     } else {
-                        $messages = Html::tag('span', $rec->getFirstError('user_id'), ['class' => 'text-danger']);
+                        $userMessages[] = Yii::t('app', '{user} - {status}', [
+                            'user' => $uid,
+                            'status' => Html::tag('span', $rec->getFirstError('user_id'), ['class' => 'text-danger'])
+                        ]);
                     }
-                    $userMessages[] = Yii::t('app', '{user} - {status}', ['user' => $uid, 'status' => $messages]);
                 }
-                \Yii::$app->getSession()->setFlash('info', implode('<br>', $userMessages));
+                if (!empty($userMessages)) \Yii::$app->getSession()->setFlash('info', implode('<br>', $userMessages));
             } else {
                 $errors = $model->getErrors('file');
                 \Yii::$app->getSession()->setFlash('error', implode('<br>', $errors));

@@ -130,7 +130,7 @@ JS
             'action' => Url::toRoute(['import-data']),
             'options' => ['enctype' => 'multipart/form-data']
         ]); ?>
-        <?= $form->field($model, 'file')->fileInput()->hint(Yii::t('app', 'Example block-level help text here.')) ?>
+        <?= $form->field($model, 'file')->fileInput()->hint(Yii::t('app', 'Select the file with IDs users to import. File size should not exceed 1MB.')) ?>
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app', 'Upload'), ['class' => 'btn btn-primary']) ?>
         </div>
