@@ -49,6 +49,7 @@ class Citation extends \yii\db\ActiveRecord
         return [
             // Default scenarios
             [['user_id'], 'required', 'on' => ['insert', 'update']],
+            [['user_id'], 'string', 'max' => '20', 'on' => ['insert', 'update']],
             [['user_id'], 'filter', 'filter' => 'trim', 'skipOnArray' => true, 'on' => ['insert', 'update']],
             [['user_id'], 'unique', 'targetAttribute' => ['user_id'], 'on' => ['insert', 'update']],
             [['h_index', 'bib_ref', 'missing'], 'integer', 'on' => ['insert', 'update']],

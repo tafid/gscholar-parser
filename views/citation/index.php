@@ -13,7 +13,6 @@ $this->title = Yii::t('app', 'Citations');
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerCss('.btn {margin-bottom: 5px;');
 $this->registerJs(<<<JS
-$(':checkbox').radiocheck();
 // Refresh data
 $(document).on('click', '#refresh-data', function(event) {
     event.preventDefault();
@@ -34,7 +33,9 @@ $(document).on('pjax:send', function() {
     $('.overlay').show()
 });
 $(document).on('pjax:beforeReplace', function() {
-    $('.overlay').hide()
+    $('.overlay').hide();
+    // Scroll to Grid
+    $('html, body').animate({scrollTop: $('#citation-gridview').offset().top}, 'fast');
 });
 JS
 )
@@ -102,6 +103,7 @@ JS
         <i class="fa fa-refresh fa-spin"></i>
     </div>
     <?= GridView::widget([
+        'id' => 'citation-gridview',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'layout' => "<div class='row'></div><div class=\"table-responsive\">{items}</div>\n<div class='row'><div class='col-xs-6'><div class='dataTables_info'>{summary}</div></div>\n<div class='col-xs-6'><div class='dataTables_paginate paging_bootstrap'>{pager}</div></div></div>",
