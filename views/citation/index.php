@@ -35,7 +35,7 @@ $(document).on('pjax:send', function() {
 $(document).on('pjax:beforeReplace', function() {
     $('.overlay').hide();
     // Scroll to Grid
-    $('html, body').animate({ scrollTop: $('#citation-gridview').offset().top }, 'fast');
+    $('html, body').animate({ scrollTop: $('#citation-gridview').offset().top + 53}, 'fast');
 });
 JS
 )
@@ -87,7 +87,7 @@ JS
                     </fieldset>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div id="citation-buttons" class="col-md-12">
                 <?= Html::a('<i class="glyphicon glyphicon-plus"></i>&nbsp; ' . Yii::t('app', 'Add user'), ['create'], ['class' => 'btn btn-success visible-lg-inline-block visible-md-inline-block visible-sm-inline-block visible-xs-block']) ?>
                 <?= Html::a('<i class="glyphicon glyphicon-floppy-save"></i>&nbsp; ' . Yii::t('app', 'Export data'), ['export'], ['class' => 'btn btn-info visible-lg-inline-block visible-md-inline-block visible-sm-inline-block visible-xs-block']) ?>
                 <?= Html::a('<i class="fa fa-refresh"></i>&nbsp; ' . Yii::t('app', 'Fetch data'), ['export'], [
