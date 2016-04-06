@@ -35,7 +35,7 @@ $(document).on('pjax:send', function() {
 $(document).on('pjax:beforeReplace', function() {
     $('.overlay').hide();
     // Scroll to Grid
-    $('html, body').animate({scrollTop: $('#citation-gridview').offset().top}, 'fast');
+    $('html, body').animate({ scrollTop: $('#citation-gridview').offset().top }, 'fast');
 });
 JS
 )
@@ -65,40 +65,40 @@ JS
         <?php $this->registerJs('$(\'#myModal\').modal(\'show\')') ?>
     <?php endif; ?>
         <div class="row" style="margin-bottom: 1em">
-        <div class="col-md-12">
-            <?= Html::a('<i class="glyphicon glyphicon-plus"></i>&nbsp; ' . Yii::t('app', 'Add user'), ['create'], ['class' => 'btn btn-success visible-lg-inline-block visible-md-inline-block visible-sm-inline-block visible-xs-block']) ?>
-            <?= Html::a('<i class="glyphicon glyphicon-floppy-save"></i>&nbsp; ' . Yii::t('app', 'Export data'), ['export'], ['class' => 'btn btn-info visible-lg-inline-block visible-md-inline-block visible-sm-inline-block visible-xs-block']) ?>
-            <?= Html::a('<i class="fa fa-refresh"></i>&nbsp; ' . Yii::t('app', 'Fetch data'), ['export'], [
-                'id' => 'refresh-data',
-                'class' => 'btn btn-warning visible-lg-inline-block visible-md-inline-block visible-sm-inline-block visible-xs-block',
-                'data-loading-text' => '<i class="fa fa-refresh fa-spin"></i>&nbsp;&nbsp;' . Yii::t('app', 'Loading') . '...',
-                'data-complete-text' => '<i class="fa fa-refresh"></i>&nbsp; ' . Yii::t('app', 'Fetch data')
-            ]) ?>
-        </div>
-        <div class="col-md-12">
-            <?php if (Yii::$app->session->hasFlash('error')) : ?>
-                <div class="alert alert-danger" role="alert">
-                    <p><?= Yii::$app->session->getFlash('error') ?></p>
-                </div>
-            <?php endif; ?>
-            <div class="well well-sm">
-                <fieldset>
-                    <legend><?= Yii::t('app', 'Import users from file') ?></legend>
-                    <?php $form = ActiveForm::begin([
-                        'id' => 'import-data-form',
-                        'action' => Url::toRoute(['import-data']),
-                        'options' => ['enctype' => 'multipart/form-data']
-                    ]); ?>
-                    <?= $form->field($model, 'file')->fileInput()->hint(Yii::t('app', 'Select the file with IDs users to import. File size should not exceed 1MB.')) ?>
-                    <div class="form-group">
-                        <?= Html::submitButton(Yii::t('app', 'Upload'), ['class' => 'btn btn-primary']) ?>
+            <div class="col-md-12">
+                <?php if (Yii::$app->session->hasFlash('error')) : ?>
+                    <div class="alert alert-danger" role="alert">
+                        <p><?= Yii::$app->session->getFlash('error') ?></p>
                     </div>
-                    <?php ActiveForm::end(); ?>
-                </fieldset>
+                <?php endif; ?>
+                <div class="well well-sm">
+                    <fieldset>
+                        <legend><?= Yii::t('app', 'Import users from file') ?></legend>
+                        <?php $form = ActiveForm::begin([
+                            'id' => 'import-data-form',
+                            'action' => Url::toRoute(['import-data']),
+                            'options' => ['enctype' => 'multipart/form-data']
+                        ]); ?>
+                        <?= $form->field($model, 'file')->fileInput()->hint(Yii::t('app', 'Select the file with IDs users to import. File size should not exceed 1MB.')) ?>
+                        <div class="form-group">
+                            <?= Html::submitButton(Yii::t('app', 'Upload'), ['class' => 'btn btn-primary']) ?>
+                        </div>
+                        <?php ActiveForm::end(); ?>
+                    </fieldset>
+                </div>
             </div>
-        </div>
+            <div class="col-md-12">
+                <?= Html::a('<i class="glyphicon glyphicon-plus"></i>&nbsp; ' . Yii::t('app', 'Add user'), ['create'], ['class' => 'btn btn-success visible-lg-inline-block visible-md-inline-block visible-sm-inline-block visible-xs-block']) ?>
+                <?= Html::a('<i class="glyphicon glyphicon-floppy-save"></i>&nbsp; ' . Yii::t('app', 'Export data'), ['export'], ['class' => 'btn btn-info visible-lg-inline-block visible-md-inline-block visible-sm-inline-block visible-xs-block']) ?>
+                <?= Html::a('<i class="fa fa-refresh"></i>&nbsp; ' . Yii::t('app', 'Fetch data'), ['export'], [
+                    'id' => 'refresh-data',
+                    'class' => 'btn btn-warning visible-lg-inline-block visible-md-inline-block visible-sm-inline-block visible-xs-block',
+                    'data-loading-text' => '<i class="fa fa-refresh fa-spin"></i>&nbsp;&nbsp;' . Yii::t('app', 'Loading') . '...',
+                    'data-complete-text' => '<i class="fa fa-refresh"></i>&nbsp; ' . Yii::t('app', 'Fetch data')
+                ]) ?>
+            </div>
     </div>
-    <?php Pjax::begin(['id' => 'citation-grid']) ?>
+    <?php Pjax::begin(['id' => 'citation-grid', 'scrollTo' => true, 'timeout' => 0]) ?>
     <div class="overlay" style="display: none">
         <i class="fa fa-refresh fa-spin"></i>
     </div>
