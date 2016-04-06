@@ -98,7 +98,7 @@ JS
                 ]) ?>
             </div>
     </div>
-    <?php Pjax::begin(['id' => 'citation-grid', 'scrollTo' => true, 'timeout' => 0]) ?>
+    <?php Pjax::begin(['id' => 'citation-grid', 'timeout' => 0]) ?>
     <div class="overlay" style="display: none">
         <i class="fa fa-refresh fa-spin"></i>
     </div>
