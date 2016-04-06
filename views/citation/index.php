@@ -35,7 +35,7 @@ $(document).on('pjax:send', function() {
 $(document).on('pjax:beforeReplace', function() {
     $('.overlay').hide();
     // Scroll to Grid
-    $('html, body').animate({ scrollTop: $('#citation-gridview').offset().top + 53}, 'fast');
+    $('html, body').animate({ scrollTop: $('#citation-gridview').offset().top - 53}, 'fast');
 });
 JS
 )
