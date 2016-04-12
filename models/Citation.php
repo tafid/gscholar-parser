@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use DiDom\Document;
 use Exception;
 use serhatozles\simplehtmldom\SimpleHTMLDom;
 use Yii;
@@ -80,9 +81,9 @@ class Citation extends \yii\db\ActiveRecord
     }
 
     public function fetchData() {
-        $citations = self::find()->orderBy('updated_at ASC')->all(); // ->where(['missing' => 0])
+        $citations = self::find()->orderBy('updated_at ASC')->all();
         foreach ($citations as $citation) {
-            $scholarPage = $this->getScholarPage($citation->user_id);
+            $scholarPage = $this->fetchByDiDom($citation->user_id);
             if (is_array($scholarPage) && !in_array(null, $scholarPage)) {
                 $citation->h_index = $scholarPage['h_index'];
                 $citation->bib_ref = $scholarPage['bib_ref'];
@@ -96,16 +97,38 @@ class Citation extends \yii\db\ActiveRecord
         }
     }
 
-    private function getScholarPage($user_id)
+    /**
+     * SimpleHTMLDom fetch
+     * @param $userId
+     * @return array|bool
+     */
+    private function fetchBySimpleHTMLDom($userId)
     {
-        $page = SimpleHTMLDom::file_get_html(sprintf('https://scholar.google.com/citations?user=%s&hl=uk', $user_id)); //$user_id
+        $page = SimpleHTMLDom::file_get_html(sprintf('https://scholar.google.com/citations?user=%s&hl=uk', $userId));
         $result = [];
         try {
             $result['h_index'] = $page->find('#gsc_rsb_st > tbody > .gsc_rsb_std', 0)->plaintext;
             $result['bib_ref'] = $page->find('#gsc_rsb_st > tbody > .gsc_rsb_std', 2)->plaintext;
         } catch (Exception $e) {
-//            print $e->getMessage();
             return false;
+        }
+
+        return $result;
+    }
+
+    /**
+     * DiDom fetch
+     * @param $userId
+     * @return bool|array
+     */
+    private function fetchByDiDom($userId)
+    {
+        $result = false;
+        $url = sprintf('https://scholar.google.com/citations?user=%s&hl=uk', $userId);
+        $document = new Document($url, true);
+        if ($document->has('#gsc_rsb_st')) {
+            $result['h_index'] = $document->find('#gsc_rsb_st')[0]->find('.gsc_rsb_std')[0]->innerHtml();
+            $result['bib_ref'] = $document->find('#gsc_rsb_st')[0]->find('.gsc_rsb_std')[2]->innerHtml();
         }
 
         return $result;

@@ -19,6 +19,7 @@
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "serhatozles/yii2-simplehtmldom": "dev-master",
+        "imangazaliev/didom": "1.6.*",
         "bower-asset/flat-ui" : "*"
     },
     "require-dev": {

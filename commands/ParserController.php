@@ -16,6 +16,6 @@ class ParserController extends Controller
     public function actionParse()
     {
         (new Citation())->fetchData();
-         print $this->ansiFormat("Done", Console::FG_YELLOW);
+         print $this->ansiFormat(PHP_EOL . "Done" . PHP_EOL, Console::FG_YELLOW);
     }
 }
