@@ -83,6 +83,7 @@ class Citation extends \yii\db\ActiveRecord
     public function fetchData() {
         $citations = self::find()->orderBy('updated_at ASC')->all();
         foreach ($citations as $citation) {
+//            $scholarPage = $this->fetchBySimpleHTMLDom($citation->user_id);
             $scholarPage = $this->fetchByDiDom($citation->user_id);
             if (is_array($scholarPage) && !in_array(null, $scholarPage)) {
                 $citation->h_index = $scholarPage['h_index'];
