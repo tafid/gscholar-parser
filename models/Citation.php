@@ -127,8 +127,9 @@ class Citation extends \yii\db\ActiveRecord
         $url = sprintf('https://scholar.google.com/citations?user=%s&hl=uk', $userId);
         $document = new Document($url, true);
         if ($document->has('#gsc_rsb_st')) {
-            $result['h_index'] = $document->find('#gsc_rsb_st')[0]->find('.gsc_rsb_std')[0]->innerHtml();
-            $result['bib_ref'] = $document->find('#gsc_rsb_st')[0]->find('.gsc_rsb_std')[2]->innerHtml();
+            $table = $document->find('#gsc_rsb_st')[0]->find('.gsc_rsb_std');
+            $result['h_index'] = $table[0]->innerHtml();
+            $result['bib_ref'] = $table[2]->innerHtml();
         }
 
         return $result;
