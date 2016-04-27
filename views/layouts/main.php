@@ -38,7 +38,7 @@ AppAsset::register($this);
         'items' => [
             ['label' => Yii::t('app', 'Citation'), 'url' => ['/citation/index'], 'visible' => !Yii::$app->user->isGuest],
             ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login'], 'visible' => Yii::$app->user->isGuest],
-            ['label' => Yii::t('app', 'Logout ({0})', [Yii::$app->user->identity->username]), 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post'], 'visible' => !Yii::$app->user->isGuest],
+            ['label' => Yii::t('app', 'Logout ({0})', [@Yii::$app->user->identity->username]), 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post'], 'visible' => !Yii::$app->user->isGuest],
         ],
     ]);
     NavBar::end();
